@@ -1,10 +1,10 @@
 version: '3.8'
 
 services:
-  ffc-template-node:
+  ffc-kafka-admin:
     build:
       context: .
       target: production
-    image: ffc-template-node
-    container_name: ffc-template-node
+    image: ffc-kafka-admin
+    container_name: ffc-kafka-admin
     environment: {}

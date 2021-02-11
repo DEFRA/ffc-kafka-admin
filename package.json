@@ -1,8 +1,8 @@
 {
-  "name": "ffc-template-node",
-  "version": "0.1.0",
-  "description": "description-of-project-goes-here",
-  "homepage": "https://github.com/DEFRA/ffc-template-node",
+  "name": "ffc-kafka-admin",
+  "version": "1.0.0",
+  "description": "Manage Kafka brokers",
+  "homepage": "https://github.com/DEFRA/ffc-kafka-admin",
   "main": "app/index.js",
   "scripts": {
     "test": "jest --runInBand",
@@ -13,11 +13,9 @@
   "contributors": [],
   "license": "OGL-UK-3.0",
   "dependencies": {
-    "@hapi/hapi": "^20.0.0"
+    "kafkajs": "^1.15.0"
   },
   "devDependencies": {
-    "jest": "^26.4.0",
-    "jest-junit": "^11.1.0",
     "nodemon": "^2.0.4",
     "standard": "^14.3.4"
   },
