@@ -19,12 +19,12 @@ Connection details should be supplied as environment variables to the docker run
 
 ### List consumer groups
 ```
-docker run --rm -e EVENT_HOST=myEventHub.servicebus.net -e "EVENT_CONNECTION_STRING=myConnectionString" defradigital/ffc-kafka-admin list-consumer-groups
+docker run --rm -e EVENT_HOST=myEventHub.servicebus.net -e EVENT_CONNECTION_STRING="myConnectionString" defradigital/ffc-kafka-admin list-consumer-groups
 ```
 
 ### Delete consumer groups
 ```
-docker run --rm -e EVENT_HOST=myEventHub.servicebus.net -e "EVENT_CONNECTION_STRING=myConnectionString" defradigital/ffc-kafka-admin delete-consumer-group myConsumerGroupId
+docker run --rm -e EVENT_HOST=myEventHub.servicebus.net -e EVENT_CONNECTION_STRING="myConnectionString" defradigital/ffc-kafka-admin delete-consumer-group myConsumerGroupId
 ```
 If the consumer group does not exist then no action will be taken.
 ## Licence
