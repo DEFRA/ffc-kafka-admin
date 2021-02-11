@@ -1,19 +1,27 @@
 const { EventConsumerGroup } = require('../events')
-const config = require('./config')
+const config = require('../config')
 let consumerGroup
 
 const listConsumerGroups = async () => {
-  const groups = await consumerGroup.listConsumerGroups()
-  console.info(groups)
-  return groups
+  try {
+    const groups = await consumerGroup.listConsumerGroups()
+    console.info(groups)
+    return groups
+  } catch (err) {
+    console.error('Unable to retrieve consumer groups: ', err)
+  }
 }
 
 const deleteConsumerGroup = async (consumerGroupId) => {
-  const existingGroups = await listConsumerGroups()
-  if (existingGroups.some(x => x.groupId === consumerGroupId)) {
-    await consumerGroup.deleteConsumerGroup(consumerGroupId)
+  try {
+    const existingGroups = await listConsumerGroups()
+    if (existingGroups.groups.some(x => x.groupId === consumerGroupId)) {
+      await consumerGroup.deleteConsumerGroup(consumerGroupId)
+    }
+    console.info(`Consumer group deleted ${consumerGroupId}`)
+  } catch (err) {
+    console.error('Unable to delete consumer group', err)
   }
-  console.info(`Consumer group deleted ${consumerGroupId}`)
 }
 
 const connect = async () => {
@@ -22,7 +30,7 @@ const connect = async () => {
 }
 
 const disconnect = async () => {
-  await consumerGroup.disconnect()
+  await consumerGroup.closeConnection()
 }
 
 module.exports = {

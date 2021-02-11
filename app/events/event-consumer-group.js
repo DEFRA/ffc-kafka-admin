@@ -17,7 +17,7 @@ class EventConsumerGroup extends EventBase {
 
   async deleteConsumerGroup (groupId) {
     await this.admin.deleteGroups([groupId])
-    console.info(`Deleted Consumer Group: ${groupId}`)
+    console.info(`Deleted consumer group: ${groupId}`)
   }
 
   async closeConnection () {

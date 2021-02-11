@@ -3,7 +3,6 @@ const { Kafka, logLevel } = require('kafkajs')
 class EventBase {
   constructor (config) {
     this.config = config
-    this.topic = config.topic
     this.port = this.getPort(config.port)
   }
 
@@ -15,7 +14,7 @@ class EventBase {
       clientId: 'ffc-kafka-admin',
       retry: {
         initialRetryTime: 100,
-        retries: 5
+        retries: 1
       },
       ...credentials
     })
