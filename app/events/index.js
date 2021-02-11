@@ -1,7 +1,5 @@
-const EventReceiver = require('./event-consumer-group')
-const EventSender = require('./event-sender')
+const EventConsumerGroup = require('./event-consumer-group')
 
 module.exports = {
-  EventReceiver,
-  EventSender
+  EventConsumerGroup
 }

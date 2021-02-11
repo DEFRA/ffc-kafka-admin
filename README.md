@@ -1,36 +1,32 @@
-# FFC Template Node
+# FFC Kafka Admin
 
-Template to support rapid delivery of microservices for FFC Platform. It contains the configuration needed to deploy a simple Hapi Node server to the Azure Kubernetes Platform.
+Application and Docker image to administer Kafka.  Supports Kafka and Azure Event Hubs
 
-## Usage
+## Connetion details
+Connection details should be supplied as environment variables to the docker run command.
 
-Create a new repository from this template and run `./rename.js` specifying the new name of the project and the description to use e.g.
+- `EVENT_HOST` - host name of Kafka broker, not required if using Azure Event Hubs
+- `EVENT_PORT` - port used by Kafka broker host, defaults to `9093` if not supplied.  Not required if using Azure Event Hubs
+- `EVENT_AUTHENTICATION` - authentication mechanism, available options are `connectionString` (for Azure Event Hubs), `password` for username and password or `none` for no authentication.  Defaults to `connectionString`
+- `EVENT_CONNECTION_STRING` - connection string for Azure Event Hubs
+- `EVENT_USERNAME` - username for `password` authentication
+- `EVENT_PASSWORD` - password for `password` authentication
+- `EVENT_MECHANISM` - authentication mechanism for `password` authentication, available options are `plain`, `scram-sha-256` or `scram-sha-512`.  Defaults to `plain`
+
+## Capabilities
+- list consumer groups
+- delete consumer groups
+
+### List consumer groups
 ```
-./rename.js ffc-demo-web "Web frontend for demo workstream"
+docker run -rm -e "EVENT_CONNECTION_STRING=myConnectionString" defradigital/ffc-kafka-admin ./app list-consumer-groups
 ```
 
-The script will update the following:
-
-* `package.json`: update `name`, `description`, `homepage`
-* `docker-compose.yaml`: update the service name, `image` and `container_name`
-* `docker-compose.test.yaml`: update the service name, `image` and `container_name`
-* `docker-compose.override.yaml`: update the service name, `image` and `container_name`
-* Rename `helm/ffc-template-node`
-* `helm/ffc-template-node/Chart.yaml`: update `description` and `name`
-* `helm/ffc-template-node/values.yaml`: update  `name`, `namespace`, `workstream`, `image`, `containerConfigMap.name`
-* `helm/ffc-template-node/templates/_container.yaml`: update the template name
-* `helm/ffc-template-node/templates/cluster-ip-service.yaml`: update the template name and list parameter of include
-* `helm/ffc-template-node/templates/config-map.yaml`: update the template name and list parameter of include
-* `helm/ffc-template-node/templates/deployment.yaml`: update the template name, list parameter of deployment and container includes
-
-### Notes on automated rename
-
-* The Helm chart deployment values in `helm/ffc-template-node/values.yaml` may need updating depending on the resource needs of your microservice
-* The rename is a one-way operation i.e. currently it doesn't allow the name being changed from to be specified
-* There is some validation on the input to try and ensure the rename is successful, however, it is unlikely to stand up to malicious entry
-* Once the rename has been performed the script can be removed from the repo
-* Should the rename go awry the changes can be reverted via `git clean -df && git checkout -- .`
-
+### Delete consumer groups
+```
+docker run -rm -e "EVENT_CONNECTION_STRING=myConnectionString" defradigital/ffc-kafka-admin ./app delete-consumer-group myConsumerGroupId
+```
+If the consumer group does not exist then no action will be taken.
 ## Licence
 
 THIS INFORMATION IS LICENSED UNDER THE CONDITIONS OF THE OPEN GOVERNMENT LICENCE found at:
