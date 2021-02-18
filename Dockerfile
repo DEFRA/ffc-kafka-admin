@@ -1,5 +1,4 @@
 ARG PARENT_VERSION=1.2.3-node14.15.3
-ARG PORT=3000
 ARG PORT_DEBUG=9229
 
 # Development
@@ -15,7 +14,7 @@ EXPOSE ${PORT} ${PORT_DEBUG}
 COPY --chown=node:node package*.json ./
 RUN npm install
 COPY --chown=node:node . .
-CMD [ "npm", "run", "start:watch" ]
+ENTRYPOINT [ "npm", "run", "start:watch" ]
 
 # Production
 FROM defradigital/node:${PARENT_VERSION} AS production
@@ -29,4 +28,4 @@ EXPOSE ${PORT}
 COPY --from=development /home/node/app/ ./app/
 COPY --from=development /home/node/package*.json ./
 RUN npm ci
-CMD [ "node", "app" ]
+ENTRYPOINT [ "node", "app" ]

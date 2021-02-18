@@ -4,13 +4,12 @@ version: '3.8'
 # to provide dependencies and expose ports for local testing
 
 services:
-  ffc-template-node:
+  ffc-kafka-admin:
     build:
       target: development
-    image: ffc-template-node-development
-    container_name: ffc-template-node-development
+    image: ffc-kafka-admin-development
+    container_name: ffc-kafka-admin-development
     ports:
-      - "3000:3000"
       - "9229:9229"
     volumes:
       - ./app/:/home/node/app/
