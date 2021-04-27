@@ -1,6 +1,6 @@
 {
   "name": "ffc-kafka-admin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Manage Kafka brokers",
   "homepage": "https://github.com/DEFRA/ffc-kafka-admin",
   "main": "app/index.js",
