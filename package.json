@@ -13,7 +13,7 @@
   "contributors": [],
   "license": "OGL-UK-3.0",
   "dependencies": {
-    "kafkajs": "^1.15.0"
+    "kafkajs": "^1.16.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4",
